@@ -1,0 +1,725 @@
+:root {
+    /* Main colors */
+    --colorBackground: #CCC;
+    --mainColor:  #dc0a2d;
+    --mainColorDarkened: #D1092B;
+    --secondaryColor:  #89061c;
+    /* Colors of light gray elements */
+    --grey: #dedede;
+    --greySecondary: #848585;
+    /* Colors of the big blue led */
+    --blueMain: #28aafd;
+    --blueSecondary: #035175;
+    /* Colors of black buttons */
+    --blackMain: #00312b;
+    --blackSecondary: #000910;
+    /* Test colors */
+    --transp: rgba(117, 190, 218, 0.5);
+ }
+ p {
+    margin-top: 8px;
+ }
+ ul {
+    margin-top: 5px;
+    padding-left: 15px;
+ }
+ a {
+    width: 100%;
+    height: 100%
+ }
+ body {
+    user-select: none;
+    font-family: verdana;
+    font-size: 12px;
+    background: url("/img/background.jpeg") no-repeat center center fixed;
+    background-size:cover;
+ }
+  /* SCENE */
+ .scene {
+    perspective: 3000px;
+    perspective-origin: 300px 500px;
+    transform: translateY( 0px );
+    position: fixed;
+    top: 50%;
+ }
+ /* GROUPS OF 3D ELEMENTS */
+ .group3D {
+    position: relative;
+    transform-style: preserve-3d;
+ }
+ /* Opening part of the Pokedex */
+ .mobile {
+    transition: all 4s ease-out;
+    /* Center of the 3D thing (around which the rotation is done) */
+    transform-origin: 300px 0px 7px;
+ }
+  /* --------------
+   ELEMENTS IN 3D
+   -------------- */
+ /* Entire Pokedex */
+ .pokedex {
+    transform: rotateX( 30deg ) rotateY( -25deg ) rotateZ( 40deg ) translateZ(-10px) translateX(10px) translateY(-200px);
+    height: 100%;
+    width: 280px;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: 4s;
+    /* Center of the 3D thing (around which the rotation is done) */
+    transform-origin: 140px 0px 0px;
+ }
+ /* Back of the main part */
+ .mainPartFace { position: absolute; transition: all 4s ease-out; }
+ .mainPartFace--front  { transform: rotateY(  0deg) translateZ( 12.5px); background-color: var( --secondaryColor );width: 280px;height: 470px;}
+ .mainPartFace--right  { transform: rotateY( 90deg) translateZ(267.5px); background-color: var( --secondaryColor );width:  25px;height: 470px;}
+ .mainPartFace--back   { transform: rotateY(180deg) translateZ( 12.5px); background-color: var( --secondaryColor );width: 280px;height: 470px;}
+ .mainPartFace--left   { transform: rotateY(-90deg) translateZ( 12.5px); background-color: var( --secondaryColor );width:  25px;height: 470px;}
+ .mainPartFace--bottom { transform: rotateX(-90deg) translateZ(457.5px); background-color: var( --secondaryColor );width: 280px;height: 25px;}
+ .mainPartFace--top    { transform: rotateX( 90deg) translateZ(   20px) translateY( 8px); background-color: var( --secondaryColor );width: 320px;height: 40px;}
+    /* Hinge connecting the main and secondary part */
+  .hingeFace { position: absolute; transition: all 4s ease-out; }
+  .hingeFace--top         { transform: rotateX( 90deg) translateZ( -30px) translateX(280px) translateY(7.57px);background-color: var( --secondaryColor );width: 40px; height: 40px;clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);}
+  .hingeFace--bottom      { transform: rotateX(-90deg) translateZ(450px) translateX(280px) translateY(-7.5px);background-color: var( --secondaryColor );width: 40px; height: 40px;clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);}
+  .hingeFace--front       { transform: rotateY(   0deg) translateZ(  27.5px) translateX(  292px) translateY(50px); background-color: var( --mainColor );width: 16.57px; height: 420px;}
+  .hingeFace--front-right { transform: rotateY(  45deg) translateZ( 231.5px) translateX(  201px) translateY(50px); background-color: var( --mainColor );width: 16.57px; height: 420px;}
+  .hingeFace--front-left  { transform: rotateY( -45deg) translateZ(  -181px) translateX(211.5px) translateY(50px); background-color: var( --secondaryColor );width: 16.57px; height: 420px;}
+  .hingeFace--right       { transform: rotateY(  90deg) translateZ( 311.3px) translateX(   -8px) translateY(50px); background-color: var( --mainColor );width: 16.57px; height: 420px;}
+  .hingeFace--left        { transform: rotateY( -90deg) translateZ(  -272px) translateX(    8px) translateY(50px); background-color: var( --secondaryColor );width: 16.57px; height: 420px;}
+  .hingeFace--back        { transform: rotateY( 180deg) translateZ(  12.5px) translateX( -292px) translateY(50px); background-color: var( --secondaryColor );width: 16.57px; height: 420px;}
+  .hingeFace--back-right  { transform: rotateY( 130deg) translateZ( 238.1px) translateX( -192px) translateY(50px); background-color: var( --secondaryColor );width: 16.57px; height: 420px;}
+  .hingeFace--back-left   { transform: rotateY(-133deg) translateZ(-198.9px) translateX( -194px) translateY(50px); background-color: var( --secondaryColor );width: 16.57px; height: 420px;}
+ /* Upper block of the main box */
+ .uppercaseFace { position: absolute; }
+ .uppercaseFace--front         { transform: rotateY(  0deg) translateZ(27.5px); background-color: #D1092B ;width: 320px;height: 100px;clip-path: polygon(34% 100%, 50% 50%, 100% 50%, 100% 0, 0 0, 0 100%);}
+ .uppercaseFace--left          { transform: rotateY(-90deg) translateZ( 7.3px) translateX(  20.4px); background-color: var( --secondaryColor );width: 15px;height: 100px;}
+ .uppercaseFace--right         { transform: rotateY( 90deg) translateZ( 300px) translateX(    -7px); background-color: var( --secondaryColor );width: 40px;height: 50px;}
+ .uppercaseFace--back          { transform: rotateY(180deg) translateZ(12.5px) translateX(-279.8px); background-color: var( --secondaryColor );width: 40px;height: 50px;}
+ .uppercaseFace--bottom-right  { transform: rotateX( 90deg) translateZ(  -30px) translateY( 8px) translateX(159px); background-color: var( --secondaryColor );width: 161.3px;height: 40px;}
+ .uppercaseFace--bottom-center { transform: rotateX( 90deg) rotateY(-45deg) translateZ(-117px) translateY(20px) translateX( 21.4px); background-color: var( --secondaryColor );width: 72px;height: 15px;}
+ .uppercaseFace--bottom-left   { transform: rotateX( 90deg) translateZ(-92.5px) translateY(20px) translateX(  0px); background-color: var( --secondaryColor );width: 109px;height: 15px;}
+
+/* Big Blue Led */
+ .bigBlueLedFace { position: absolute; }
+ .bigBlueLedFace--front        { transform: translateX(42px) translateY(42px) translateZ(42.5px) rotateY(  0deg); background-color: var(--blueMain) ;width: 20px;height: 20px; }
+ .bigBlueLedFace--top          { transform: translateX(42px) translateY(24px) translateZ(35px) rotateY( 0deg) rotateX( 45deg) rotateZ( 180deg); background: linear-gradient(var(--blueMain), var(--blueSecondary)) ;width: 20px;height: 21.21px; }
+ .bigBlueLedFace--bottom       { transform: translateX(42px) translateY(58.9px) translateZ(35px) rotateY(180deg) rotateX( 45deg); background: linear-gradient(var(--blueMain), var(--blueSecondary)) ;width: 20px;height: 21.21px; }
+ .bigBlueLedFace--left         { transform: translateX(24.5px) translateY(41.5px) translateZ(35px) rotateZ(-90deg) rotateX( 45deg)rotateZ( 180deg); background: linear-gradient(var(--blueMain), var(--blueSecondary)) ;width: 20px;height: 21.21px; }
+ .bigBlueLedFace--right        { transform: translateX(59.5px) translateY(41.5px) translateZ(35px) rotateZ( 90deg) rotateX( 45deg)rotateZ( 180deg); background: linear-gradient(var(--blueMain), var(--blueSecondary)) ;width: 20px;height: 21.21px; }
+ .bigBlueLedFace--top-left     { transform: translateX(27.8px) translateY(29.2px) translateZ(35px) rotateX( -90deg) rotateY( 45deg) rotateX( -35deg); background: linear-gradient(var(--blueMain), var(--blueSecondary)); ;width: 21.21px;height: 18.4px; clip-path: polygon(50% 0%, 0% 100%, 100% 100%); }
+ .bigBlueLedFace--top-right    { transform: translateX(55px) translateY(29.2px) translateZ(35px) rotateX( -90deg) rotateY( -45deg) rotateX( -35deg); background: linear-gradient(var(--blueMain), var(--blueSecondary)); ;width: 21.21px;height: 18.4px; clip-path: polygon(50% 0%, 0% 100%, 100% 100%); }
+ .bigBlueLedFace--bottom-left  { transform: translateX(27.8px) translateY(56.6px) translateZ(35px) rotateX( -90deg) rotateY( 135deg) rotateX( -35deg); background: linear-gradient(var(--blueMain), var(--blueSecondary)); ;width: 21.21px;height: 18.4px; clip-path: polygon(50% 0%, 0% 100%, 100% 100%); }
+ .bigBlueLedFace--bottom-right { transform: translateX(55px) translateY(56.6px) translateZ(35px) rotateX( -90deg) rotateY( -135deg) rotateX( -35deg); background: linear-gradient(var(--blueMain), var(--blueSecondary)); ;width: 21.21px;height: 18.4px; clip-path: polygon(50% 0%, 0% 100%, 100% 100%); }
+
+/* Secondary part */
+  .secondaryPartFace { position: absolute; transition: all 4s ease-out; }
+  .secondaryPartFace--front      { transform: rotateY(  0deg) translateZ( 27.5px) translateY(   52px); background-color: var( --mainColor );width: 289px;height: 418px; clip-path: polygon(0 100%, 0 12%, 38% 12%, 55.5% 0, 100% 0, 100% 100%);}
+  .secondaryPartFace--back       { transform: rotateY(  180deg) translateZ( -15px) translateY(   52px); background-color: var( --secondaryColor );width: 289px;height: 418px; clip-path: polygon(0 0, 0 100%, 100% 100%, 100% 12%, 62% 12%, 44% 0);}
+  .secondaryPartFace--right      { transform: rotateY( 90deg) translateZ(  281px) translateX(  -21px) translateY(52px); background-color: var( --secondaryColor );width: 14px;height: 418px;}
+  .secondaryPartFace--left       { transform: rotateY(-90deg) translateZ(    7px) translateX(   21px) translateY(102px); background-color: var( --secondaryColor );width: 14px;height: 368px;}
+  .secondaryPartFace--bottom     { transform: rotateX(-90deg) translateY(-20.5px) translateZ(462.5px); background-color: var( --secondaryColor );width: 289px;height: 14px;}
+  .secondaryPartFace--top-right  { transform: rotateX(90deg) translateZ(-45.6px) translateY(20px) translateX(160px); background-color: var( --secondaryColor );width: 129px;height: 14px;}
+  .secondaryPartFace--top-left   { transform: rotateX(90deg) translateZ(  -95px) translateY(20px) translateX(  0px); background-color: var( --secondaryColor );width: 111px;height: 15px;}
+  .secondaryPartFace--top-center { transform: rotateX(90deg) rotateY(-45deg) translateZ(-120px) translateY(20px) translateX(21.4px); background-color: var( --secondaryColor );width: 71px;height: 15px;}
+
+/* White part containing the screen */
+ .whitePartFace { position: absolute; transition: all 4s ease-out; }
+ .whitePartFace--front        { transform: rotateY(  0deg) translateX( 30px) translateY( 130px) translateZ( 24px); background-color: var(--greySecondary );width: 215px;height: 190px; clip-path: polygon(0 0, 100% 0, 100% 100%, 15% 100%, 0 85%); }
+ .whitePartFace--left         { transform: rotateY(  90deg) translateX( -18px) translateY( 130px) translateZ( 26px); background-color: var(--greySecondary );width: 10px;height: 161.5px; }
+ .whitePartFace--right        { transform: rotateY(  90deg) translateX( -18px) translateY( 129.5px) translateZ(240px); background-color: var(--greySecondary );width: 10px;height: 190px; }
+ .whitePartFace--top          { transform: rotateY(  90deg) rotateX(  90deg) translateX( -18px) translateY( 133px) translateZ( -22.5px); background-color: var(--greySecondary );width: 10px;height: 215px; }
+ .whitePartFace--bottom       { transform: rotateY(  90deg) rotateX(  90deg) translateX( -18px) translateY( 149px) translateZ( -227.8px); background-color: var(--greySecondary );width: 10px;height: 183px; }
+
+/* Black button on the main part */
+ .btnBlackFace { position: absolute; transition: all 4s ease-out; cursor: pointer; }
+ .btnBlackFace--front        { transform: translateX( 31px) translateY(  130px) translateZ( 14.5px) rotateY( 180deg );width: 35px;height: 35px;  background-color: var( --blackMain ); clip-path:polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%); }
+ .btnBlackFace--right        { transform: rotateY( 90deg) translateX(-10px) translateY(141px) translateZ(60.5px);width: 10px;height: 14px; background-color: var( --blackSecondary ); }
+ .btnBlackFace--left         { transform: rotateY( 90deg) translateX(-10px) translateY(140.5px) translateZ(26px);width: 10px;height: 14px; background-color: var( --blackSecondary ); }
+ .btnBlackFace--top          { transform: rotateY( 90deg) translateX(-10px) rotateX(  90deg) translateY( 43.5px) translateZ(-123px);width: 10px;height: 14px; background-color: var( --blackSecondary ); }
+ .btnBlackFace--top-right    { transform: rotateY( 90deg) translateX(-10px) translateY(127.5px) translateZ(55px) rotateX(45deg);width: 10px;height: 15px; background-color: var( --blackSecondary ); }
+ .btnBlackFace--top-left     { transform: rotateY( 90deg) translateX(-10px) translateY(127.5px) translateZ(31.5px) rotateX(-45deg);width: 10px;height: 15px; background-color: var( --blackSecondary ); }
+ .btnBlackFace--bottom       { transform: rotateY( 90deg) translateX(-10px) rotateX(  90deg) translateY( 43.5px) translateZ(-158px);width: 10px;height: 14px; background-color: var( --blackSecondary ); }
+ .btnBlackFace--bottom-right { transform: rotateY( 90deg) translateX(-10px) translateY(152.5px) translateZ(55px) rotateX(-45deg);width: 10px;height: 15px; background-color: var( --blackSecondary ); }
+ .btnBlackFace--bottom-left  { transform: rotateY( 90deg) translateX(-10px) translateY(152.5px) translateZ(31.5px) rotateX(45deg) ;width: 10px;height: 15px; background-color: var( --blackSecondary ); }
+ .btnBlack {
+    transform: translateY(  220px) translateX( -10px) translateZ(8px);
+ }
+ /* Joystick */
+ .joystickFace { position: absolute; transition: all 4s ease-out; }
+ .joystickFace--front       { transform: rotateY( 0deg) translateZ( 23px) translateX(185px) translateY(350px); background-color: var( --blackMain );width: 75px;height: 75px; clip-path: polygon(35% 0, 65% 0, 65% 35%, 100% 35%, 100% 65%, 65% 65%, 65% 100%, 35% 100%, 35% 65%, 0 65%, 0 35%, 35% 35%); }
+ .joystickFace--left        { transform: rotateY(90deg) translateX( -18px) translateY( 350px) translateZ( 206.5px); background-color: var( --blackSecondary );width: 10px;height: 75px; }
+ .joystickFace--right       { transform: rotateY(90deg) translateX( -18px) translateY( 350px) translateZ(228px); background-color: var( --blackSecondary );width: 10px;height: 75px; }
+ .joystickFace--top         { transform: rotateY(90deg) rotateX(  90deg) translateX( -18px) translateY( 218px) translateZ( -339px); background-color: var( --blackSecondary );width: 10px;height: 75px; }
+ .joystickFace--bottom      { transform: rotateY(90deg) rotateX(  90deg) translateX( -18px) translateY( 218px) translateZ( -361px); background-color: var( --blackSecondary );width: 10px;height: 75px; }
+ .joystickFace--left-edge   { transform: rotateY(90deg) translateX( -18px) translateY( 376.5px) translateZ(180px); background-color: var( --blackSecondary );width: 10px;height: 22px; }
+ .joystickFace--right-edge  { transform: rotateY(90deg) translateX( -18px) translateY( 376.5px) translateZ(255px); background-color: var( --blackSecondary );width: 10px;height: 22px; }
+ .joystickFace--top-edge    { transform: rotateY(90deg) rotateX(  90deg) translateX( -18px) translateY( 217.5px) translateZ( -339px); background-color: var( --blackSecondary );width: 10px;height: 22px; }
+ .joystickFace--bottom-edge { transform: rotateY(90deg) rotateX(  90deg) translateX( -18px) translateY( 217.5px) translateZ( -414px); background-color: var( --blackSecondary );width: 10px;height: 22px; }
+/* Blue buttons of the secondary part */
+ .buttonSquare { cursor: pointer; }
+ .buttonSquareFace { position: absolute; transition: all 4s ease-out; }
+ .buttonSquareFace--front  { transform: translateX( 31px) translateY(  130px) translateZ( 5px) rotateY( 180deg );width: 44px;height: 37.5px; }
+ .buttonSquareFace--right  { transform: rotateY( 90deg) translateX(-10px) translateY(129.5px) translateZ(26px);width: 10px;height: 37.5px; }
+ .buttonSquareFace--left   { transform: rotateY( 90deg) translateX(-10px) translateY(129.5px) translateZ(70px);width: 10px;height: 37.5px; }
+ .buttonSquareFace--top    { transform: rotateY( 90deg) translateX(-10px) rotateX(  90deg) translateY( 48px) translateZ(-107.5px);width: 10px;height: 44px; }
+ .buttonSquareFace--bottom { transform: rotateY( 90deg) translateX(-10px) rotateX(  90deg) translateY( 48px) translateZ(  -145px);width: 10px;height: 44px; }
+ .btnBlue .buttonSquareFace--front  {
+    background-color: var( --blueMain );
+    border: 0.5px solid var( --blueSecondary );
+    box-sizing: border-box;
+ }
+ .btnBlue .buttonSquareFace--right  { background-color: var( --blueSecondary ); }
+ .btnBlue .buttonSquareFace--left   { background-color: var( --blueSecondary ); }
+ .btnBlue .buttonSquareFace--top   { background-color: var( --blueSecondary ); }
+ .btnBlue .buttonSquareFace--bottom { background-color: var( --blueSecondary ); }
+ .buttonSquare-1  { transform: translateY(   120px) translateX( 174px); }
+ .buttonSquare-2  { transform: translateY(   120px) translateX( 130px); }
+ .buttonSquare-3  { transform: translateY(   120px) translateX(  86px); }
+ .buttonSquare-4  { transform: translateY(   120px) translateX(  42px); }
+ .buttonSquare-5  { transform: translateY(   120px) translateX(  -2px); }
+  .btnWhite .buttonSquareFace--front  {
+    background-color: var( --grey );
+    border: 0.5px solid var(--greySecondary );
+    box-sizing: border-box;
+ }
+  .btnWhite .buttonSquareFace--right  { background-color: var(--greySecondary ); }
+  .btnWhite .buttonSquareFace--left   { background-color: var(--greySecondary ); }
+  .btnWhite .buttonSquareFace--top    { background-color: var(--greySecondary ); }
+  .btnWhite .buttonSquareFace--bottom { background-color: var(--greySecondary ); }
+ .buttonSquare-11 { transform: translateY(205.5px) translateX(  174px); }
+ .buttonSquare-12 { transform: translateY(205.5px) translateX(  130px); }
+/* ---------------------------
+   DETAIL ELEMENTS (Non 3D)
+   --------------------------- */
+ /* Top case Leds */
+ .uppercaseFace--front .grey {
+    border-radius: 50%;
+    height: 70px;width: 70px;
+    background-color: var( --grey );
+    margin-left: 15px;margin-top: 15px;
+    border: 2px solid var( --secondaryColor );
+ }
+ .uppercaseFace--front  .red {
+    border-radius: 50%;
+    height: 10px;width: 10px;
+    background:red;
+    margin-left: 10px;margin-top: 20px;
+    border: 1px solid var( --secondaryColor );
+ }
+ .uppercaseFace--front .yellow {
+    border-radius: 50%;
+    height: 10px;width: 10px;
+    background:yellow;
+    margin-left: 15px;margin-top: 20px;
+    border: 1px solid var( --secondaryColor );
+ }
+ .uppercaseFace--front  .green {
+    border-radius: 50%;
+    height: 10px;width: 10px;
+    background:green;
+    margin-left: 10px;margin-top: 20px;
+    border: 1px solid var( --secondaryColor );
+ }
+
+/* Elements on the closed case */
+  .secondaryPartFace--front .triangle {
+    flex-basis: 100%;
+    clip-path: polygon(0 0, 0 100%, 100% 50%);
+    background-color: #ffc300;
+    width: 24px; height: 44px;
+    margin-top: 200px; margin-left: 10px;
+ }
+  .pulse {
+    animation: pulse-animation 5s infinite;
+  }
+  @keyframes pulse-animation {
+    0% {
+      box-shadow: 0 0 0 0 rgba(16,67,99,.3);
+      border-radius: 5%;
+    }
+    100% {
+      box-shadow: 0 0 0 30px rgba(0, 0, 0, 0);
+      border-radius: 10%;
+    }
+  }
+    .pulse-red {
+    animation: pulse-animation-red 5s infinite;
+  }
+  @keyframes pulse-animation-red {
+    0% {
+      box-shadow: 0 0 0 0 red;
+      border-radius: 50%;
+    }
+    100% {
+      box-shadow: 0 0 0 5px rgba(0, 0, 0, 0);
+      border-radius: 50%;
+    }
+  }
+   .pulse-yellow{
+    animation: pulse-animation-yellow 3s infinite;
+  }
+  @keyframes pulse-animation-yellow {
+    0% {
+      box-shadow: 0 0 0 0 yellow;
+      border-radius: 50%;
+    }
+    20%{
+        box-shadow: 0 0 0 0 yellow;
+        border-radius: 50%;
+      }
+     40% {
+        box-shadow: 0 0 0 0 yellow;
+        border-radius: 50%;
+      }
+      70%{
+        box-shadow: 0 0 0 0 yellow;
+        border-radius: 50%;
+      }
+    100% {
+      box-shadow: 0 0 0 5px rgba(0, 0, 0, 0);
+      border-radius: 50%;
+    }
+  }
+   .pulse-green{
+    animation: pulse-animation-green 1s infinite;
+  }
+  @keyframes pulse-animation-green {
+    0% {
+      box-shadow: 0 0 0 0 green;
+      border-radius: 50%;
+    }
+    100% {
+      box-shadow: 0 0 0 5px rgba(0, 0, 0, 0);
+      border-radius: 50%;
+    }
+  }
+   .secondaryPartFace--front .relief {
+    width: 150px; height: 10px;
+    margin-top: 120px;
+    border-radius: 7.5px;
+    border: 1px solid var( --secondaryColor );
+ }
+
+/* Items on the open Pokedex */
+  .secondaryPartFace--back .relief {
+    background-color: var( --secondaryColor );
+    width: 268px; height: 405px;
+    margin-top:5px; margin-left:13px;
+    clip-path: polygon(0 0, 42% 0, 60% 12%, 100% 12%, 100% 100%, 0 100%);
+    padding: 2px;
+ }
+  .secondaryPartFace--back .relief .relief-interior {
+    transition: all 4s ease-out;
+    background-color: var( --secondaryColor );
+    width: 268px; height: 405px;
+    clip-path: polygon(0 0, 42% 0, 60% 12%, 100% 12%, 100% 100%, 0 100%);
+    display: flex;
+ }
+ .mainPartFace--front .relief {
+    background-color: var( --secondaryColor );
+    width: 265px; height: 405px;
+    margin-top:55px; margin-left:5px;
+    clip-path: polygon(0 100%, 0 12.5%, 39% 12.5%, 58% 0, 100% 0, 100% 100%);
+    padding: 2px;
+ }
+ .mainPartFace--front .relief .relief-interior {
+    transition: all 4s ease-out;
+    background-color: var( --secondaryColor );
+    width: 265px; height: 405px;
+    clip-path: polygon(0 100%, 0 12.5%, 39% 12.5%, 58% 0, 100% 0, 100% 100%);
+    display: flex;
+ }
+ .mainPartFace--front .container {
+    margin-top: 285px;
+    margin-left: 70px;
+ }
+  .secondaryPartFace--back .container {
+    margin-top: 100px;
+    margin-right: 23px;
+    display: flex;
+    align-items:flex-end;
+ }
+ .whitePartFace--front .container {
+    justify-content: space-between;
+    margin-left: 30px;
+    margin-right: 30px;
+ }
+ .mainPartFace--front .led-red {
+    background-color: #cc0000;
+    height:5px;
+    width: 35px;
+    border: 1px solid var( --secondaryColor );
+    border-radius: 5px;
+ }
+ .mainPartFace--front .led-red.alight {
+    background-color: #ff9999;
+    box-shadow: inset #006 0 -0.1px 2px, #ff9999 0 2px 10px;
+ }
+ .mainPartFace--front .led-blue {
+    background-color: #048ac8;
+    height:5px;
+    width: 35px;
+    border: 1px solid var( --secondaryColor );
+    margin-left: 20px;
+    border-radius: 5px;
+ }
+ .mainPartFace--front .led-blue.alight {
+    background-color: #b4e6fd;
+    box-shadow: inset #006 0 -0.1px 1.5px, #b4e6fd 0 2px 10px;
+ }
+  .secondaryPartFace--back  .trick-black {
+    background-color: var( --blackSecondary );
+    height:5px;
+    width: 35px;
+    border: 1px solid var( --secondaryColor );
+    margin-left: 5px;
+    border-radius: 5px;
+ }
+  .secondaryPartFace--back .light-yellow {
+    height:25px;
+    width: 25px;
+    border: 1px solid var( --secondaryColor );
+    margin-top: 30px;
+    border-radius: 50%;
+    background:yellow;
+    background-size: 100%;
+ }
+ .whitePartFace--front .led-red {
+    background-color: #cc0000;
+    height: 6px;
+    width: 6px;
+    border-radius: 50%;
+    margin: 11px;
+    border: 1px solid var( --secondaryColor );
+ }
+ .whitePartFace--front .light-red {
+    background-color: #cc0000;
+    height: 12px;
+    width: 12px;
+    border-radius: 50%;
+    margin: 8px;
+    border: 1px solid var( --secondaryColor );
+ }
+ .whitePartFace--front .line {
+    background-color: black;
+    height: 1px;
+    width: 19px;
+    margin-top: 5px;
+    box-shadow: 0px 0px 4px 0.1px rgba(0, 0, 0, 0.5);
+ }
+
+/* Screens */
+ .whitePartFace--front  .screen {
+    box-shadow: inset 0 0 1rem black;
+    overflow: hidden;
+    height:130px; width:155px;
+    margin-top:00px; margin-left:30px;
+    background: black;
+    border-radius: 5px;
+    background: url("https://raw.githubusercontent.com/geoffroy-luchez/Pokedex-CSS/main/images/fond.jpg") top fixed;
+ }
+  .secondaryPartFace--back  .screen {
+    box-shadow: inset 0 0 1rem black;
+    overflow: hidden;
+    height:100px; width:220px;
+    margin-top:73px; margin-left:25px;
+    background-color: #232323;
+    border-radius: 5px;
+ }
+  .secondaryPartFace--back .small-screen {
+    box-shadow: inset 0 0 1rem black;
+    overflow: hidden;
+    height:35px; width:96px;
+    margin-top:15px; margin-left:27px;
+    background-color: #232323;
+    border-radius: 5px;
+ }
+  .mainPartFace--front .green-screen {
+    box-shadow: inset 0 0 0.6rem #101010;
+    overflow: hidden;
+    height:60px; width:100px;
+    margin-top:20px;
+    background-color: #51ae5f;
+    border-radius: 5px;
+ }
+  .main-screen,  .main-screen > div {
+    height: 100%;
+ }
+  .screen, .small-screen, .green-screen {
+    /* Color of writing on the screens */
+    color: white;
+    font-family: Inconsolata, monospace;
+ }
+  .screen > *, .small-screen > *, .green-screen > * {
+    margin-left: 7px;
+    margin-right: 7px;
+ }
+ .secondary-screen img {
+    margin-left: 5px;
+    height:15px;
+    position:absolute;
+   /* Make svgs blank */
+    filter: brightness(0) invert(1);
+ }
+  .loading > div {
+    animation:  turned 1s linear infinite;
+    height:30px;
+    width:30px;
+    /* Make svgs blank */
+    filter: brightness(0) invert(1);
+    background-image: url("images/svg/load.svg");
+    background-size: cover;
+ }
+  
+/* Stuff in the screens */
+  .loading-bar {
+    height: 20px;
+    width: calc(100% - 8px);
+    border: 1px solid white;
+ }
+  .loading-bar > div {
+    background-color: white;
+    width: 0%;
+    height: 100%;
+    animation:  enlargement 5.5s linear forwards; /* "forwards" to maintain in the final state of the animation, at the end of this one */
+ }
+ .progressive_lines {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    animation: lines 5.5s linear forwards; /* "forwards" to maintain in the final state of the animation, at the end of this one */
+ }
+  .main-menuTitle p {
+    margin-bottom: 4px;
+ }
+  .main-menuTitle {
+    border-bottom: 1px solid white;
+ }
+ .main-menu__container {
+    margin-top:5px;
+ }
+ .mainMenuLine {
+    display: block;
+    margin-bottom: 4px;
+    background-color: var(--blackMain);
+    height: 20px;
+    width: 100%;
+    white-space: nowrap;
+    opacity:.7;
+ }
+ .mainMenuLine div {
+    margin-left: 5px;
+ }
+ .mainMenuLine div::first-letter {
+    text-transform: uppercase;
+ }
+ .mainMenuLine.active {
+    margin-bottom: 4px;
+    background-color: var(--blueMain);
+    color: blue;
+    height: 20px;
+    width: 100%;
+    opacity:.7;
+ }
+  .secondaryScreenKeys p {
+    margin-bottom: 0px;
+ }
+  .secondaryScreenStats > .gate {
+    display: grid;
+    grid-template-columns: 45% 45%;
+    grid-template-rows:auto;
+    width: 100%;
+    font-size: 10px ;
+ }
+  .secondaryScreenStats > p {
+    text-transform: uppercase;
+ }
+  /* Joystick */
+ .joystickFace--front .joystick-clickable--top {
+    position: absolute;
+    height:25px; width:25px; margin-top:0px; margin-left:25px;
+    border-radius: 5px;
+    cursor: pointer;
+ }
+ .joystickFace--front .joystick-clickable--bottom {
+    position: absolute;
+    height:25px; width:25px; margin-top:50px; margin-left:25px;
+    border-radius: 5px;
+    cursor: pointer;
+ }
+ .joystickFace--front .joystick-clickable--left {
+    position: absolute;
+    height:25px; width:25px; margin-top:25px; margin-left:0px;
+    border-radius: 5px;
+    cursor: pointer;
+ }
+ .joystickFace--front .joystick-clickable--right {
+    position: absolute;
+    height:25px; width:25px; margin-top:25px; margin-left:50px;
+    border-radius: 5px;
+    cursor: pointer;
+ }
+/* Clickable icons and stuff */
+ .buttonSquareFace a, .buttonSquareFace{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+ }
+ .buttonSquareFace img:hover {
+    filter: drop-shadow(0px 0px 5px white);
+ }
+ .joystickFace > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+ }
+ .joystickFace > div:hover > div {
+    border-radius: 50%;
+    background-color: white;
+    box-shadow: 0px 0px 10px 2px white;
+ }
+ .btnBlackFace--front {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+ }
+ .btnBlack:hover .btnBlackFace--front div {
+    border-radius: 50%;
+    background-color: white;
+    box-shadow: 0px 0px 10px 2px white;
+ }
+
+/* ---------
+   Animation
+   --------- */
+ @keyframes  turned {
+    0% {}
+    100% { -webkit-transform: rotateZ( 360deg ); }
+ }
+ @keyframes  enlargement {
+    0% { width: 0% }
+    100% { width: 100% }
+ }
+ @keyframes lines {
+    0% { -webkit-line-clamp: 1; }
+    100% { -webkit-line-clamp: 4; }
+ }
+ @keyframes appearance {
+    0% { opacity:0; }
+    100% { opacity:1; }
+ }
+
+/* ----------------------------------------------
+   Opening the Pokedex (with the "open" class)
+   ---------------------------------------------- */
+  .pokedex.open .mobile {
+    /* Rotation of the moving part, opening the case */
+    transform: rotateY( 140deg );
+ }
+  .pokedex.open  .hingeFace--left,
+  .pokedex.open  .hingeFace--back,
+  .pokedex.open  .hingeFace--back-left,
+  .pokedex.open  .hingeFace--back-right {
+    
+/* Lighten the hinge, a little less than the rest */
+    background-color: var( --mainColorDarkened )
+ }
+  .pokedex.open .whitePartFace--front
+ {
+    /* Brighten the gray area under the screen */
+    background-color: var( --grey )
+ }
+  .pokedex.open .mainPartFace--front,
+  .pokedex.open  .secondaryPartFace--back,
+  .pokedex.open  .secondaryPartFace--back .relief .relief-interior,
+  .pokedex.open .mainPartFace--front .relief .relief-interior
+ {
+
+/* Brighten the main and secondary interior surfaces */
+    background-color: var( --mainColor )
+ }
+  .pokedex.open {
+
+/* Repositioning the Pokedex */
+    transform: translateY( 50px ) translateZ( 0px ) translateX(0px) rotateY(0deg) rotateX(0deg) rotateZ(0deg);
+ }
+  .pokedex.open .mainPartFace--back{
+
+/* Remove shadow */
+    box-shadow: none;
+ }
+/*----------------------------------------------
+    Camera around the Pokedex
+ ----------------------------------------------*/
+ .pokedex.open-left {
+/* Repositioning the Pokedex */
+    transform: translateY( -100px ) translateZ( 0px ) translateX(-160px) rotateY(30deg) rotateX(0deg) rotateZ(0deg);
+ }
+ .pokedex.open-right {
+
+/* Repositioning the Pokedex */
+    transform: translateY( 40px ) translateZ( 100px ) translateX(-30px) rotateY(5deg) rotateX(30deg) rotateZ(0deg);
+ }
+
+/* ----------------------
+   Button movements
+   ---------------------- */
+ .joystick.joystick-angle-top {
+    transform-origin: 0px 430px 0px;
+    transform: rotateX( 5deg);
+ }
+ .joystick.joystick-angle-bottom {
+    transform-origin: 0px 355px 0px;
+    transform: rotateX(-5deg);
+ }
+ .joystick.joystick-angle-left {
+    transform-origin: 258px 0px 0px;
+    transform: rotateY(-5deg);
+ }
+ .joystick.joystick-angle-right {
+    transform-origin: 183px 0px 0px;
+    transform: rotateY( 5deg);
+ }
+
+/* Button pressed */
+ .buttonSquare .btn-press {
+    transform: translateZ(7px);
+ }
+
+/* Button pressed */
+ .btnBlack .btn-press {
+    transform: translateZ(-7px);
+ }
+  /* -------
+   Flexbox
+   ------- */
+ .flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+ }
+ .flex-left {
+    display: flex;
+    align-items: center;
+    justify-content:flex-start;
+ }
+ .flex-col {
+    display: flex;
+    flex-direction: column;
+ }
+ .flex-row {
+    display: flex;
+    flex-direction: row;
+ }
+ .line{
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+ }
+  .pokemonSearch{
+    width: 80px;
+    height: 25px;
+    background-color: var(--blackSecondary);
+    color: var(--colorBackground);
+    border-radius: 5px;
+ }
+  
+ 

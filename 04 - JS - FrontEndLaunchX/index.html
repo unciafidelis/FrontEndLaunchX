@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<script src="pokedex.js" type="text/javascript" defer></script>
+<link href="style.css" rel="stylesheet" />
+<title>Pokedex</title>
+</head>
+<body>
+<div class="line">
+ 
+<!-- Main scenario -->
+<div v-if="state == 'pokemons' || state == 'pokemon' || state === 'pokemonSkills'">
+ <img v-bind:src='pokemon.image' width="80%">
+</div>
+  <div class="scene">
+     <div class="pokedex">        
+<!-- Main block -->
+         <div class="mainPartFace mainPartFace--front">
+             <div class="relief">
+                 <div class="relief-interior">
+                     <div class="container">
+                         <div class="flex-row">
+                             <div class="led-red"></div>
+                             <div class="led-blue"></div>
+                         </div>
+                         <!-- GREEN SCREEN -->
+                         <div class="green-screen flex-center">
+                             <div v-if="state == 'pokemons' || state == 'pokemon' || state === 'pokemonSkills'">
+                                 n° {{ this.pokemon.id }}
+                                 <br>
+                                 {{ this.pokemon.nom }}
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+         </div>
+         <div class="mainPartFace mainPartFace--back"></div>
+         <div class="mainPartFace mainPartFace--right"></div>
+         <div class="mainPartFace mainPartFace--left"></div>
+         <div class="mainPartFace mainPartFace--top"></div>
+         <div class="mainPartFace mainPartFace--bottom"></div>
+         
+<!-- white screen frame -->
+         <div class="whitePartFace whitePartFace--front">
+             <div class="flex-col">
+                 <div class="flex-row flex-center">
+                     <div class="led-red"></div>
+                     <div class="led-red"></div>
+                 </div>
+                 
+                    <!-- MAIN SCREEN -->
+                 <div class="main-screen screen">
+                     <!-- Starting -->
+                     <div v-if="state === 'startup'">
+                         <p>Pokedex LaunchX<br>
+                         (v1.0.0)</p>
+                         <div class="loading-bar">
+                             <div></div>
+                         </div>
+                         <p>Arranque en proceso...</p>
+                     </div>
+                    <!-- Shutdown -->
+                     <div v-else-if="state === 'off'">
+                  
+                         <div>
+                             <p>Apagado en proceso...<p>
+                         </div>
+                     </div>
+                     <!-- Pokemons -->
+                     <div v-else-if="state === 'pokemons'">
+                         <div class='flex-center main-menuTitle'>
+                             <p>Pokedex LaunchX</p>
+                         </div>
+                         <div class="main-menu__container">
+                            <div class="mainMenuLine flex-left" v-for="( item, index ) in menu_pokemon.pokemons"  v-bind:class="{ 'active' : menu_pokemon.menu_actif == index }"> <div> {{ item.name }} </div></div>
+                        </div>
+                     </div>
+                     <!-- Pokemon -->
+                     <div v-else-if="state === 'pokemon' || state === 'pokemonSkills'">
+                         <img v-bind:src='pokemon.image' width="90%">
+                     </div>
+                 </div>
+                 <div class="container flex-row">
+                     <div class="light-red"></div>
+                     <div class="lines">
+                         <div class="line"></div>
+                         <div class="line"></div>
+                         <div class="line"></div>
+                         <div class="line"></div>
+                     </div>
+                 </div>
+             </div>
+         </div>
+         <div class="whitePartFace whitePartFace--top"></div>
+         <div class="whitePartFace whitePartFace--bottom"></div>
+         <div class="whitePartFace whitePartFace--left"></div>
+         <div class="whitePartFace whitePartFace--right"></div>
+         <div class="whitePartFace whitePartFace--bottom-right"></div>
+         <!-- Joystick -->
+         <div class="joystick group3D">
+             <div class="joystickFace joystickFace--front">
+                 <div class="joystick-clickable joystick-clickable--top" @mousedown="press_joystick( 'top' )" @mouseup="press_joystick( null )" @mouseleave="press_joystick( null )"><div></div></div>
+                 <div class="joystick-clickable joystick-clickable--bottom" @mousedown="press_joystick( 'bottom' )" @mouseup="press_joystick( null )" @mouseleave="press_joystick( null )"><div></div></div>
+                 <div class="joystick-clickable joystick-clickable--left" @mousedown="press_joystick( 'left' )" @mouseup="press_joystick( null )" @mouseleave="press_joystick( null )"><div></div></div>
+                 <div class="joystick-clickable joystick-clickable--right" @mousedown="press_joystick( 'right' )" @mouseup="press_joystick( null )" @mouseleave="press_joystick( null )"><div></div></div>
+             </div>
+             <div class="joystickFace joystickFace--top"></div>
+             <div class="joystickFace joystickFace--bottom"></div>
+             <div class="joystickFace joystickFace--left"></div>
+             <div class="joystickFace joystickFace--right"></div>
+             <div class="joystickFace joystickFace--top-edge"></div>
+             <div class="joystickFace joystickFace--bottom-edge"></div>
+             <div class="joystickFace joystickFace--left-edge"></div>
+             <div class="joystickFace joystickFace--right-edge"></div>
+         </div>
+         <!-- Upper case -->
+         <div class="uppercaseFace uppercaseFace--front">
+             <div class="flex-row">
+                 <div class="grey"></div>
+                 <div class="yellow pulse-yellow"></div>
+                 <div class="red pulse-red"></div>
+                 <div class="green pulse-green"></div>
+             </div>
+         </div>
+         <div class="uppercaseFace uppercaseFace--left"></div>
+         <div class="uppercaseFace uppercaseFace--right"></div>
+         <div class="uppercaseFace uppercaseFace--back"></div>
+         <div class="uppercaseFace uppercaseFace--bottom-right"></div>
+         <div class="uppercaseFace uppercaseFace--bottom-center"></div>
+         <div class="uppercaseFace uppercaseFace--bottom-left"></div>
+         
+        <!-- Big Blue LED -->
+         <div class="bigBlueLedFace bigBlueLedFace--front pulse"></div>
+         <div class="bigBlueLedFace bigBlueLedFace--top"></div>
+         <div class="bigBlueLedFace bigBlueLedFace--bottom"></div>
+         <div class="bigBlueLedFace bigBlueLedFace--left"></div>
+         <div class="bigBlueLedFace bigBlueLedFace--right"></div>
+         <div class="bigBlueLedFace bigBlueLedFace--bottom-left"></div>
+         <div class="bigBlueLedFace bigBlueLedFace--bottom-right"></div>
+         <div class="bigBlueLedFace bigBlueLedFace--top-left"></div>
+         <div class="bigBlueLedFace bigBlueLedFace--top-right"></div>
+         <!-- Black button -->
+         <div class="btnBlack group3D">
+             <div class="group3D" @mousedown="press( 'ok' );">
+                 <div class="btnBlackFace btnBlackFace--front">
+                     <div></div>
+                 </div>
+                 <div class="btnBlackFace btnBlackFace--left"></div>
+                 <div class="btnBlackFace btnBlackFace--right"></div>
+                 <div class="btnBlackFace btnBlackFace--top"></div>
+                 <div class="btnBlackFace btnBlackFace--top-left"></div>
+                 <div class="btnBlackFace btnBlackFace--top-right"></div>
+                 <div class="btnBlackFace btnBlackFace--bottom"></div>
+                 <div class="btnBlackFace btnBlackFace--bottom-left"></div>
+                 <div class="btnBlackFace btnBlackFace--bottom-right"></div>
+             </div>
+         </div>
+         <!-- Hinge & abutment assembly -->
+         <div class="mobile group3D">
+             <!-- Hinge -->
+             <div class='hingeFace hingeFace--top'></div>
+             <div class='hingeFace hingeFace--bottom'></div>
+             <div class="hingeFace hingeFace--front"></div>
+             <div class="hingeFace hingeFace--front-right"></div>
+             <div class="hingeFace hingeFace--front-left"></div>
+             <div class="hingeFace hingeFace--left"></div>
+             <div class="hingeFace hingeFace--right"></div>
+             <div class="hingeFace hingeFace--back"></div>
+             <div class="hingeFace hingeFace--back-right"></div>
+             <div class="hingeFace hingeFace--back-left"></div>
+             <!-- Abutment -->
+             <div class='secondaryPartFace secondaryPartFace--front' @click="opening()">
+                <!-- Exterior -->
+          
+                 <div class="triangle"></div>
+                 <div class="flex-center flex-col">
+                     <div class="relief"></div>
+                 </div>
+             </div>
+             <div class='secondaryPartFace secondaryPartFace--back'>
+                 <!-- Interior -->
+                 <div class="relief">
+                     <div class="relief-interior flex-col">
+                         
+                        <!-- SECONDARY SCREEN -->
+                         <div class="screen secondary-screen">
+                             <!-- Starting -->
+                             <div v-if="state === 'startup'">
+                                 <p class='progressive_lines'>
+                                     POKEBIOS (C) Unciafidelis<br>
+                                     Total Memory: 256 PokeB<br>
+                                     CPU: Mew XD-151<br>
+                                 </p>
+                             </div>
+                             
+                                <!-- Shutdown -->
+
+                             <div v-else-if="state === 'off'">
+                                 <div class="flex-center">
+                                     <p>Apagado en proceso...<p>
+                                 </div>
+                             </div>
+                             <!-- Pokemons -->
+                             <div v-else-if="state === 'pokemons'" class="secondaryScreenKeys">
+                                 <p> Bienvenido Entrenador!
+                                 </p>
+                             </div>
+                             <!-- Pokemon  STATS-->
+                             <div v-else-if="state === 'pokemon'" class="secondaryScreenStats">
+                                 <p class="flex-center"><b>{{ pokemon.nom }}</b></p>
+                                 <div class="gate">
+                                     <div><b>ATK :</b> {{ pokemon.stats[1].base_stat }}</div>
+                                     <div><b>DEF :</b> {{ pokemon.stats[2].base_stat }}</div>
+                                     <div><b>SP ATK :</b> {{ pokemon.stats[3].base_stat }}</div>
+                                     <div><b>SP DEF :</b> {{ pokemon.stats[4].base_stat }}</div>
+                                     <div><b>HP :</b> {{ pokemon.stats[5].base_stat }}</div>
+                                     <div><b>SPD :</b> {{ pokemon.stats[0].base_stat }}</div>
+                                 </div>
+                             </div>
+                             <!-- Pokemon  Moves-->
+                             <div v-else-if="state === 'pokemonSkills'" class="secondaryScreenStats">
+                                <p class="flex-center"><b>{{ pokemon.nom }}</b></p>
+                                <div class="gate">
+                                    <div><b>MOV1 :</b> {{ pokemon.moves[0].move.name }}</div>
+                                    <div><b>MOV2 :</b> {{ pokemon.moves[1].move.name }}</div>
+                                    <div><b>MOV3 :</b> {{ pokemon.moves[2].move.name }}</div>
+                                    <div><b>MOV4 :</b> {{ pokemon.moves[3].move.name }}</div>
+                                    <div><b>MOV5 :</b> {{ pokemon.moves[4].move.name }}</div>
+                                    <div><b>MOV6 :</b> {{ pokemon.moves[5].move.name }}</div>
+                                </div>
+                            </div>
+                         </div>
+                         <div class="container flex-col">
+                             <div class="flex-row">
+                                 <div class="trick-black"></div>
+                                 <div class="trick-black"></div>
+                             </div>
+                             <div class="light-yellow"></div>
+                         </div>
+                         <div class="flex-row">
+                             <!-- SMALL SCREEN 1 pokemon Type -->
+                             <div class="small-screen flex-center">
+                                 <div v-if="state == 'pokemon' || state === 'pokemonSkills'">
+                                     Type: {{ this.pokemon.types[0].type.name }}
+                                 </div>
+                             </div>
+                             <!-- SMALL SCREEN 2 Pokemon Search -->
+                             <div class="small-screen flex-center">
+                                 <div v-if="state == 'pokemons' || state === 'pokemonSkills' || state == 'pokemon'" >
+                                     <input class="pokemonSearch"  v-on:keyup.enter="getPokemonSearch" placeholder="Nombre/nº"></input>
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+             <div class='secondaryPartFace secondaryPartFace--right'></div>
+             <div class='secondaryPartFace secondaryPartFace--left'></div>
+             <div class='secondaryPartFace secondaryPartFace--bottom'></div>
+             <div class='secondaryPartFace secondaryPartFace--top-left'></div>
+             <div class='secondaryPartFace secondaryPartFace--top-center'></div>
+             <div class='secondaryPartFace secondaryPartFace--top-right'></div>
+             <!-- Blue buttons -->
+             <div class="buttonSquare btnBlue buttonSquare-1 group3D">
+                 <div class="group3D" @mousedown="state='pokemon'; camera('left'); press();">
+                     <div class="buttonSquareFace buttonSquareFace--front">
+                        <span class="material-icons">
+                            format_indent_increase
+                            </span>
+                     </div>
+                     <div class="buttonSquareFace buttonSquareFace--top"></div>
+                     <div class="buttonSquareFace buttonSquareFace--bottom"></div>
+                     <div class="buttonSquareFace buttonSquareFace--left"></div>
+                     <div class="buttonSquareFace buttonSquareFace--right"></div>
+                 </div>
+             </div>
+             <div class="buttonSquare btnBlue buttonSquare-2 group3D">
+                <div class="group3D" @mousedown="state = 'pokemonSkills';">
+                    <div class="lock buttonSquareFace buttonSquareFace--front">
+                       <span class="material-icons">
+                               preview
+                               </span>
+                    </div>
+                    <div class="buttonSquareFace buttonSquareFace--top"></div>
+                    <div class="buttonSquareFace buttonSquareFace--bottom"></div>
+                    <div class="buttonSquareFace buttonSquareFace--left"></div>
+                    <div class="buttonSquareFace buttonSquareFace--right"></div>
+                </div>
+            </div>
+             <div class="buttonSquare btnBlue buttonSquare-3 group3D">
+                 <div class="group3D" @mousedown="state = 'pokemon'; camera('right'); press();">
+                     <div class="buttonSquareFace buttonSquareFace--front">
+                        <span class="material-icons">
+                            center_focus_strong
+                            </span>
+                     </div>
+                     <div class="buttonSquareFace buttonSquareFace--top"></div>
+                     <div class="buttonSquareFace buttonSquareFace--bottom"></div>
+                     <div class="buttonSquareFace buttonSquareFace--left"></div>
+                     <div class="buttonSquareFace buttonSquareFace--right"></div>
+                 </div>
+             </div>
+             <div class="buttonSquare btnBlue buttonSquare-4 group3D">
+                <div class="group3D" @mousedown="camera('centre'); press( 'return' );">
+                    <div class="buttonSquareFace buttonSquareFace--front">
+                       <span class="material-icons">
+                           catching_pokemon
+                           </span>
+                    </div>
+                    <div class="buttonSquareFace buttonSquareFace--top"></div>
+                    <div class="buttonSquareFace buttonSquareFace--bottom"></div>
+                    <div class="buttonSquareFace buttonSquareFace--left"></div>
+                    <div class="buttonSquareFace buttonSquareFace--right"></div>
+                </div>
+            </div>
+             
+             <div class="buttonSquare btnBlue buttonSquare-5 group3D">
+                 <div class="group3D" @mousedown="closing(); power(); press();">
+                     <div class="buttonSquareFace buttonSquareFace--front">
+                        <span class="material-icons">
+                            power_settings_new
+                            </span>
+                     </div>
+                     <div class="buttonSquareFace buttonSquareFace--top"></div>
+                     <div class="buttonSquareFace buttonSquareFace--bottom"></div>
+                     <div class="buttonSquareFace buttonSquareFace--left"></div>
+                     <div class="buttonSquareFace buttonSquareFace--right"></div>
+                 </div>
+             </div>
+             <div class="buttonSquare btnWhite buttonSquare-11 group3D">
+                 <div class="group3D" @mousedown="state = 'pokemons'; press( 'return' );">
+                     <div class="buttonSquareFace buttonSquareFace--front">
+                     </div>
+                     <div class="buttonSquareFace buttonSquareFace--top"></div>
+                     <div class="buttonSquareFace buttonSquareFace--bottom"></div>
+                     <div class="buttonSquareFace buttonSquareFace--left"></div>
+                     <div class="buttonSquareFace buttonSquareFace--right"></div>
+                 </div>
+             </div>
+             <div class="buttonSquare btnWhite buttonSquare-12 group3D">
+                 <div class="group3D" @mousedown="press( 'ok' );">
+                     <div class="buttonSquareFace buttonSquareFace--front">
+                     </div>
+                     <div class="buttonSquareFace buttonSquareFace--top"></div>
+                     <div class="buttonSquareFace buttonSquareFace--bottom"></div>
+                     <div class="buttonSquareFace buttonSquareFace--left"></div>
+                     <div class="buttonSquareFace buttonSquareFace--right"></div>
+                 </div>
+             </div>
+         </div>
+     </div>
+ </div>
+</div>
+</body>
+<!-- VueJS development version -->
+<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+</body>
+</html>
+ 
+ 
+
