@@ -40,7 +40,7 @@
     perspective-origin: 300px 500px;
     transform: translateY( 0px );
     position: fixed;
-    top: 50%;
+    top: 40%;
  }
  /* GROUPS OF 3D ELEMENTS */
  .group3D {
@@ -414,7 +414,7 @@
     margin-top:00px; margin-left:30px;
     background: black;
     border-radius: 5px;
-    background: url("https://raw.githubusercontent.com/geoffroy-luchez/Pokedex-CSS/main/images/fond.jpg") top fixed;
+    background: url("/img/background.jpeg") top fixed;
  }
   .secondaryPartFace--back  .screen {
     box-shadow: inset 0 0 1rem black;
